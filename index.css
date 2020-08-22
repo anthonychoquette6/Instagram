@@ -120,6 +120,7 @@ button:focus {
     justify-content	:center;
     align-items: center;
     align-content: center;
+    z-index:45;
 }
 
 #logoLoad {
@@ -137,6 +138,11 @@ button:focus {
         border: 1px solid #dbdbdb;
         width: 350px;
         height: 370px;
+    }
+    @media (prefers-color-scheme: dark) {
+        #mainContainer {
+            background:#171717;
+        }
     }
 }
 
@@ -156,4 +162,39 @@ button:focus {
     input, button {
         width:80%;
     }
-  }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background:#1f1f1f;
+        color:white;
+    }
+    #errorMessage {
+        color:white;
+    }
+    #logo {
+        -webkit-filter: invert(1);
+        filter: invert(1);
+    }
+    #mainContainer {
+        border-color:#5e5e5e;
+    }
+    #logoLoad {
+        -webkit-filter: invert(1);
+        filter: invert(1);
+    }
+    #loadingScreen {
+        background:#1f1f1f;
+    }
+    input {
+        background:#383838;
+        border-color:#5d5d5d;
+        color:white;
+    }
+    input:disabled {
+        background:#212121;
+    }
+    button:disabled {
+        background:#0095f633;
+    }
+}
