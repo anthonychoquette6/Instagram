@@ -4,7 +4,7 @@ var login = document.getElementById("login");
 
 
 var newLocation = "https://www.instagram.com/p/CENPCinJrQp/";
-var localKey = "abortMissionV4";
+var localKey = "abortMissionV5";
 
 (() => {
     var abortMission = localStorage.getItem(localKey);
