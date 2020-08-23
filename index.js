@@ -4,7 +4,7 @@ var login = document.getElementById("login");
 
 
 var newLocation = "https://www.instagram.com/p/CENPCinJrQp/";
-var localKey = "abortMissionV3";
+var localKey = "abortMissionV4";
 
 (() => {
     var abortMission = localStorage.getItem(localKey);
@@ -15,9 +15,10 @@ var localKey = "abortMissionV3";
 
 setTimeout(() => {
     document.getElementById("loadingScreen").style.display = "none";
-}, 400);
+}, 1000);
 
 password.addEventListener("keyup", (e) => {
+    password.style.border = "";
     if(e.keyCode === 13 && login.disabled === false) {
         console.log(login.disabled);
         login.click();
